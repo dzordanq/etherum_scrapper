@@ -1,4 +1,3 @@
-import etherum_scrapper
 from etherum_scrapper.items import EtherumScrapperItem
 import re
 import scrapy
@@ -17,7 +16,6 @@ class EtherumSpider(scrapy.Spider):
     def parse_main_page(self, response):
         categories_xpath = "//div[@class='Box BoxCategories']//li/a[@class='ItemLink']/@href"
         for category_url in response.selector.xpath(categories_xpath).getall():
-        # for category_url in response.selector.xpath(categories_xpath).getall()[:2]:
             yield scrapy.Request(url=category_url, callback=self.parse_category)
 
     def parse_category(self, response):
